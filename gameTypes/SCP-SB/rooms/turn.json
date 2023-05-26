@@ -1,0 +1,5 @@
+[
+    {"name": "Lockroom", "alt": ["Lockroom", "Gas-Chamber", "Gaschamber"]},
+    {"name": "Elevator", "alt": ["Elevator"], "orientation":[null, 1 ,1 ,1]},
+    {"name": "scp1162", "alt": ["scp1162","Hole", "Gloryhole"]}
+]

@@ -1,0 +1,8 @@
+The chamber contains the clockwork machine itself and a couple of shelves on the right-hand side of the chamber.$
+$ spoiler
+
+The shelves contain a first aid kit and two documents: one concerning the use of SCP-914 and the other being one of Dr. L's notes.$
+
+You can use the machine by placing items into the left chamber of the machine and then turning the key after changing the setting.$
+
+A full list of inputs and outputs can be found <a href="https://scpcb.fandom.com/wiki/SCP-914/outputs" target="_blank" >here.</a>

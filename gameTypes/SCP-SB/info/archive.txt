@@ -1,0 +1,20 @@
+The archive room is a featureless, rectangular room, with shelves lining either side of the walls.
+$ spoiler
+The items found on the shelves are randomized. They can be the following:
+
+40% chance for a document. The said document can be the following:$
+- SCP-079's document.$
+- SCP-096's document.$
+- SCP-682's document.$
+- SCP-939's document.$
+- SCP-966's document.$
+- SCP-1048's document.$
+- SCP-1123's document.$
+$
+5% chance for a level 2 or level 3 keycard.$
+5% chance for a first aid kit.$
+10% chance for a 9V Battery.$
+10% chance for an S-Nav.$
+15% chance for a radio.$
+10% chance for a clipboard.$
+5% chance for a MasterCard, playing card, or origami.$

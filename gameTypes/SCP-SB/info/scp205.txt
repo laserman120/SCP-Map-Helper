@@ -1,0 +1,9 @@
+SCP-205 is a pair of flood lamps used in photography.$
+$ spoiler
+A shadow of a woman is cast on the wall, displaying her in various suggestive poses. $
+Eventually the image will change to display horned male figures idly standing around. 
+Shortly after the figures will begin to attack the shadow woman until she dies.$
+
+Upon any of the male figures appearing, the door to the chamber will open. $
+Once the player enters the room all three figures will appear and stare at the player, followed by the doors closing and the lamps turning off. $
+After the lights go out the figures will turn invisible and begin attacking the player until they die.

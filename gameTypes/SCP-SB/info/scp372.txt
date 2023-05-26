@@ -1,0 +1,11 @@
+SCP-372's containment chamber is composed of a cube of plexiglass, a control panel and a shelf.$
+
+spoiler$
+On the control panel SCP-372's document can be found.$
+On the shelf a radio will spawn.$
+$
+Entering the chamber does not require a keycard since the blast door is already open.$
+When the room is first entered, a rustling noise can be faintly heard, indicating that SCP-372 has begun to stalk the player.$
+
+By turning very quickly or blinking rapidly, the player, on occasion, can see SCP-372 out of the corner of their view.$
+SCP-372 sometimes makes noises while stalking the player throughout the game.

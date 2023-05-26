@@ -1,0 +1,34 @@
+11.05.23
+Added the Info Menu, takes txt file and uses $ to break a line
+
+12.05.23
+Moved the room types into seperate json files. No longer inside the index.js
+Adjusted the height of the info box to prevent text clipping over the buttons at the bottom.
+Added spoiler checkmark to enable or disable further information on rooms
+Adjusted margin of the bottom buttons to help in small window cases
+
+13.05.23
+Added setup for different game types
+added check for the game version selected during a save
+changed cell image type check to a switch
+
+22.05.23
+Added the option the move the highlight around with the arrow keys. This also allows for the creation of cells
+Automatically highlight the search input whenever the card menu is open
+First cell will be highlighted on start
+Double klick while pressing control now deletes the targeted cell
+
+23.05.23
+When creating a new cell with the arrow keys, you can now hold down control to keep the highlight at the current position.
+Reworked the right card menu, this no longer deletes and recreates itself each time. 
+It is replaced by static buttons and search fields, which are no longer modified each time.
+Instead the only thing that is modified are the images inside a new div, these are deleted and rendered again each time. Due to the way the insertion of images works i dont plan on only refreshing when it actually changes.
+Making most parts static will hopefully allow for easier customization later on.
+Still looks like shit
+
+24.05.23
+Its now possible for rooms to force adjacent rooms to be created, usefull in cases in which people "might" assume that there is no room adjacent as it is invisible.
+Added enter to set the first image in the list, which is currently shown.
+
+Maybe change the current approach? Replace the background image to set down a rough representation of the current room and add a logo for identification on top,
+ this would make the layout of certain rooms clearer while keeping it easy to spot

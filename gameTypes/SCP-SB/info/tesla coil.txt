@@ -1,0 +1,5 @@
+A hallway consisting of a Tesla coil found in the center of the room, which can shock and kill the player.$
+On occasion the Tesla coil can be disabled, this can be determined by whether or not a buzzing sound is emitting from the gate. It appears in every zone of the facility.$
+$ spoiler 
+SCP-173 and SCP-096 are not affected by the Tesla coil.$
+However, SCP-106 can be "shocked"

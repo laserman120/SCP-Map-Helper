@@ -1,0 +1,7 @@
+{
+    "name": "scp-map-maker",
+    "type": "module",
+  "dependencies": {
+    "flatted": "^3.2.7"
+  }
+}

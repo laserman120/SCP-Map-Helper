@@ -1,0 +1,327 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ddd;
+  }
+
+  .main-container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(65, 65, 65);
+    background-color: #fff;
+    width: var(--containerWidth);
+    height: var(--containerHeight);
+  }
+
+  .cell {
+    position: absolute;
+    width: var(--cellSize);
+    height: var(--cellSize);
+    border: 1px solid rgb(65, 65, 65);
+    pointer-events: visible;
+    background-size: contain;
+  }
+  .button {
+    width: var(--buttonWidth);
+    height: var(--buttonHeight);
+    border: none;
+    background-color: gray;
+  }
+  /* Hide buttons by default */
+  .cell .button {
+       display: none;
+  }
+
+  /* Show buttons when hovering over the cell */
+  .cell:hover .button {
+      display: block;
+  }
+  .button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  /*Define Buttons*/
+  }
+  .top {
+    transform: translate(-50%, -50%);
+  }
+  .right {
+    transform: translate(50%, -50%) rotate(90deg);
+  }
+  .bottom {
+    transform: translate(-50%, 50%);
+  }
+  .left {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  /*Define Card menu*/
+  .cardMenu {
+      flex-grow: 1;
+      position: absolute;
+      top: 50%;
+      right:0;
+      width: var(--cardMenuWidth);
+      height: var(--cardMenuHeight);
+      transform: translateY(-50%);
+      display: flex;
+      flex-wrap: wrap;
+      border: 2px solid black;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+
+  .imageBox {
+    padding: 1%;
+    overflow: auto;
+    height: calc(100%);
+    align-items: flex-start;
+    white-space: normal;
+    width: 98%;
+    margin-bottom: var(--ImageBoxBottomMar);
+    margin-top: var(--ImageBoxTopMar)
+  }
+
+  .imageBox img {
+      margin: 5px;
+      cursor: pointer;
+      max-width: var(--imageMaxSize);
+      max-height: var(--imageMaxSize);
+      min-width: var(--imageMaxSize);
+      min-height: var(--imageMaxSize);
+  }
+
+  /*Cell highlight*/
+  .highlight {
+      border: 2px solid rgb(241, 178, 5);
+      z-index: 1;
+  }
+
+  .functions-container {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #f0f0f0;
+      border-top: 1px solid #0000;
+  }
+
+
+.cardMenu input[type="text"] {
+padding: 0px;
+border: 1px solid #ccc;
+border-radius: 4px;
+position: fixed;
+top: 0.5%;
+left: 50%;
+transform: translateX(-50%);
+z-index: 1;
+height: 5%;
+width: 80%;
+text-align: center;
+}
+
+/* Style for search input placeholder */
+input[type="text"]::placeholder {
+color: #aaa;
+}
+
+/* Style for search input on focus */
+input[type="text"]:focus {
+outline: none;
+border-color: #4CAF50;
+box-shadow: 0 0 8px 0 rgba(76, 175, 80, 0.2);
+}
+
+.delete-buttons {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: center;
+padding: 2%;
+box-sizing: border-box;
+align-items: center;
+}
+
+.delete-buttons button {
+padding: 2%;
+margin: 1%;
+}
+
+.delete-buttons button:last-child {
+padding: 2%;
+margin: 1%;
+}
+.card .delete-buttons {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.card .delete-buttons button {
+background-color: transparent;
+border: none;
+font-size: 14px;
+cursor: pointer;
+margin: 0 4px;
+}
+
+.card .delete-buttons button:hover {
+text-decoration: underline;
+}
+
+.card .delete-buttons .delete-cell {
+color: #f44336;
+}
+
+.card .delete-buttons .delete-image {
+color: #2196f3;
+}
+
+/*Info Buttons*/
+
+.infoMenu {
+flex-grow: 1;
+position: absolute;
+top: 50%;
+left: 0;
+width: var(--infoMenuWidth);
+height: var(--infoMenuHeight);
+transform: translateY(-50%);
+display: flex;
+flex-wrap: wrap;
+border: 2px solid black;
+z-index: 1;
+justify-content: center;
+align-items: stretch;
+flex-direction: column;
+font-family: 'arial';
+}
+
+.info-buttons {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+display: flex;
+align-items: center;
+margin-top: auto;
+justify-content: center;
+padding: 2%;
+box-sizing: border-box;
+}
+
+.info-buttons button {
+padding: 2%;
+margin: 1%;
+}
+
+.info-buttons button:last-child {
+padding: 2%;
+margin-right: 0;
+}
+
+.info-buttons button:hover {
+text-decoration: underline;
+}
+
+.infoBox {
+    font-size: 14px;
+    padding: 10px;
+    overflow: auto;
+    height: calc(100%);
+    align-items: flex-start;
+    white-space: normal;
+    word-wrap: break-word;
+    margin-bottom: var(--infoBoxBottomMar);
+  }
+
+
+
+.popupContainer{
+    display: contents;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 50%;
+}
+
+  /* Popup container */
+.settingsPopup {
+    visibility: hidden;
+    width: 160px;
+    height: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 3;
+    bottom: 50%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+.popupBackground{
+    visibility: hidden;
+    background-color: #555;
+    opacity: 50%;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+
+}
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:0.5 ;}
+  }
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .showBG {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeInBG {
+    from {opacity: 0;}
+    to {opacity: 0.5;}
+    }
+    
+    @keyframes fadeInBG {
+    from {opacity: 0;}
+    to {opacity:0.5 ;}
+    }

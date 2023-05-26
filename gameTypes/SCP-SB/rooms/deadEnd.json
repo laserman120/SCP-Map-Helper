@@ -1,0 +1,13 @@
+[
+    {"name": "archive", "alt": ["Archive", "Storage", "Archive Room"]},
+    {"name": "end room", "alt": ["end room", "vault", "door"]},
+    {"name": "scp205", "alt": ["scp205", "Desktop", "euclid"]},
+    {"name": "scp372", "alt": ["scp372", "from the corner of your eye", "stalker", "euclid"]},
+    {"name": "scp914", "alt": ["scp914", "the clockworks", "machine", "safe"]},
+    {"name": "scp079", "alt": ["scp079", "PC", "Computer", "AI", "Artificial Intelligence", "euclid"]},
+    {"name": "scp035", "alt": ["scp035", "possesive mask", "tentacles", "keter"]},
+    {"name": "scp106", "alt": ["scp106", "the old man", "corrossion", "pocket dimension man", "keter"]},
+    {"name": "scp895", "alt": ["scp895", "coffin", "hallucinations", "CCTV", "euclid"]},
+    {"name": "elevator lounge", "alt": ["elevator lounge", "elevators", "emergency evacuation lift"]},
+    {"name": "scp008", "alt": ["scp008", "gas leak", "hazmat", "decontamination", "euclid"]}
+]

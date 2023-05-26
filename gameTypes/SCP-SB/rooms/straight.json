@@ -1,0 +1,18 @@
+[
+    {"name": "storeroom", "alt": ["storeroom", "Archive", "storage"]},
+    {"name": "lockroom", "alt": ["lockroom","button-room", "switch"]},
+    {"name": "small testing chamber", "alt": ["small testing chamber","smalltestingchamber", "testingchamber", "small-testing-chamber"]},
+    {"name": "surveilance", "alt": ["surveilance", "camera"]},
+    {"name": "tesla coil", "alt": ["tesla coil", "electrical", "grid", "taser", "tesla Coil"]},
+    {"name": "security gateway", "alt": ["security gateway", "decontamination", "checkpoint"]},
+    {"name": "scp012", "alt": ["scp012", "A Bad Composition", "euclid"]},
+    {"name": "containment room 5", "alt": ["containment room 5", "scp500", "scp1499"]},
+    {"name": "scp1123", "alt": ["scp1123", "Atrocity Skull", "nazi germany"]},
+    {"name": "scp storage chamber", "alt": ["scp storage chamber","scp714", "scp427", "scp860", "scp1025"]},
+
+    {"name": "large testing chamber", "alt": ["large testing chamber","gas", "stairs"]},
+    {"name": "small server room", "alt": ["small server room","scp096"]},
+    {"name": "maintanance tunnels", "alt": ["maintanance tunnels", "elevator"]},
+    {"name": "warhead room", "alt": ["warhead room"]},
+    {"name": "scp049", "alt": ["scp049", "plague doctor", "elevator"]}
+]
