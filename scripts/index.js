@@ -6,7 +6,7 @@ let grid
 let buttonHeight
 let buttonWidth
 
-//Which version of the game is being mapped?
+//Which version of the game is being mapped? This will be changed to a selector later on
 let gameVersion = "SCP-SB"
 
 //define all global vars adjusted depending on game type
@@ -333,7 +333,9 @@ function setup(){
     
 }
 
-enableSettingsPopup()
+//For testing
+//enableSettingsPopup()
+
 function enableSettingsPopup() {
     var popup = document.getElementById("settingsPopup");
     var popupBG = document.getElementById("popupBackground");
