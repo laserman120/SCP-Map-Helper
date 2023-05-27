@@ -1,4 +1,4 @@
-//Define global vars
+//Define global vars 
 
 //this will be used to keep track of the image last hovered over
 let currentSelectedImage = null
@@ -173,6 +173,22 @@ function setup(){
             regenerateMap();
         }
     };
+
+    const openSettingsButton = document.createElement("settingsButton");
+    openSettingsButton.innerText = "Settings";
+    openSettingsButton.onclick = () => {
+
+            enableSettingsPopup();
+
+    };
+
+    const closeSettingsButton = document.createElement("settingsButton");
+    closeSettingsButton.innerText = "Close";
+    closeSettingsButton.onclick = () => {
+
+            disableSettingsPopup();
+
+    };
     
     //create the info menu
     
@@ -188,10 +204,14 @@ function setup(){
     const infoButtonsContainer = document.createElement('div');
     infoButtonsContainer.classList.add('info-buttons');
     
-    infoButtonsContainer.appendChild(saveMapBtn);
-    infoButtonsContainer.appendChild(spoilersContainer);
-    infoButtonsContainer.appendChild(restoreMapBtn);
-    
+    infoButtonsContainer.appendChild(openSettingsButton);
+
+    const settingsPopup = document.getElementById("settingsPopup")
+    settingsPopup.appendChild(saveMapBtn);
+    settingsPopup.appendChild(spoilersContainer);
+    settingsPopup.appendChild(restoreMapBtn);
+    settingsPopup.appendChild(closeSettingsButton);
+
     // Add delete buttons container to the card
     infoMenu.appendChild(infoButtonsContainer);
     
@@ -494,11 +514,23 @@ function removeImagesFromCard(){
     }
 }
 
+//selects the first image currently visible in the card and places it into the cell
 async function selectFirstImage(){
+    //get all images in the card
     const allImages = Array.from(document.getElementById("imageBox").getElementsByTagName('img'))
     if(!allImages) return;
 
-    let img = allImages[0]
+    let remainingImages = []
+    //add only images shown into the array
+    for (let i = 0; i < allImages.length; i++) {
+        if(allImages[i].style.display == "none") continue;
+
+        remainingImages.push(allImages[i]);
+        
+    }
+
+    //get the first shown images in the list
+    let img = remainingImages[0]
     let cellRC = getHighlightedCell()
     let cell = getCell(cellRC[0], cellRC[1])
     let imageNames = await fetchImageNames()
