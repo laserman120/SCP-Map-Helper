@@ -28,6 +28,15 @@ body {
     pointer-events: visible;
     background-size: contain;
   }
+
+  .imageContainer {
+    position: absolute;
+    width: var(--cellSize);
+    height: var(--cellSize); 
+    background-size: contain;
+    z-index: -1;
+  }
+
   .button {
     width: var(--buttonWidth);
     height: var(--buttonHeight);

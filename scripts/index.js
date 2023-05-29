@@ -408,11 +408,12 @@ async function refreshImages(){
         const img = document.createElement('img');
         img.id = "img"
         img.src = gameDataFolder + 'icons/' + imageNames[i].name + '.png';
+        let roomImage = gameDataFolder + 'roomImages/' + imageNames[i].name + '.png';
         // Set the alt attribute of the image
         img.alt = imageNames[i].alt.join(', ');
         img.addEventListener('click', function () {
             // Remove existing image if present
-            removeImageInCell(row, col)
+            removeIconInCell(row, col)
             
 
             // Create new image and add to cell
@@ -422,6 +423,8 @@ async function refreshImages(){
             newImg.classList.add('icon');
             cell.appendChild(newImg);
             addImageHover(newImg)
+
+            placeImageIntoCellContainer(row, col, roomImage)
         });
 
         imageBox.appendChild(img);
@@ -431,7 +434,7 @@ async function refreshImages(){
     }
 }
 
-function removeImageInCell(row, col){
+function removeIconInCell(row, col){
     let cell = getCell(row, col)
 
     if (cell.querySelector('img')) {
@@ -554,6 +557,18 @@ async function selectFirstImage(){
     addImageHover(newImg)
 }
 
+async function placeImageIntoCellContainer(row, col, roomImage){
+    //get the container of the cell
+    const cell = document.getElementsByClassName("imageContainer " + "R" + row + "C" + col)[0]
+    const img = document.createElement('img');
+    let cellData = checkEntrance(row, col)
+    console.log(cellData[0])
+    cell.classList.add("data" + cellData[0]);
+    img.src = roomImage;
+    cell.style.backgroundImage = 'url(' + img.src + ')';   
+}
+
+
 //add a cell
 function addCell(row, col) {
     //Check if it would be out of bounds
@@ -620,6 +635,14 @@ function addCell(row, col) {
         if(col > 0 && (row !== heavyZoneRow && row !== entranceZoneRow)){
             createButton('left', row, col);
         };  
+
+        //add the image container for the image later on
+        let imageContainer = document.createElement("div");
+        imageContainer.className = "imageContainer " + "R" + row + "C" + col;
+
+        grid[row][col].appendChild(imageContainer)
+
+
     }
 }
 
@@ -732,7 +755,9 @@ function createButton(direction, row, col) {
             break;
             }
         }
-        removeImageInCell(row, col)
+
+        //remove the current image from cell
+        removeIconInCell(row, col)
     })
 getCell(row, col).appendChild(button);
 }
@@ -839,59 +864,19 @@ function recolorButtons(row, col, buttonArray, color){
 
 //reloads the specified cell
 function reloadCell(row, col){
-    //Specify the 4 possible directions a door can be
-    let directions = [null, null, null, null]
-    //get the current cell to reload
-    let reloadingCell = document.getElementsByClassName("cell " + "R" + row + "C" + col)[0]
-    //find all the buttons in the cell
-    let buttonTopCheck = reloadingCell.querySelector(".button.top");
-    let buttonRightCheck = reloadingCell.querySelector(".button.right");
-    let buttonBottomCheck = reloadingCell.querySelector(".button.bottom");
-    let buttonLeftCheck = reloadingCell.querySelector(".button.left");
-
-    //check each button if it even exists
-    if (buttonTopCheck) {
-        //Find the current color
-        buttonTopCheck = getComputedStyle(reloadingCell?.getElementsByClassName("button top")[0])
-        let buttonTopCheckColor = buttonTopCheck['background-color']
-        //check if the color is green, if so add it to the directions
-        if(buttonTopCheckColor == "rgb(0, 128, 0)") directions[0] = 1
-    }
-    if (buttonRightCheck) {
-        let buttonRightCheck = getComputedStyle(reloadingCell?.getElementsByClassName("button right")[0]) ?? null;
-        let buttonRightCheckColor = buttonRightCheck['background-color']
-     if(buttonRightCheckColor == "rgb(0, 128, 0)") directions[1] = 1
-    }
-    if (buttonBottomCheck) {
-        let buttonBottomCheck = getComputedStyle(reloadingCell?.getElementsByClassName("button bottom")[0]) ?? null;
-        let buttonBottomCheckColor = buttonBottomCheck['background-color']
-        if(buttonBottomCheckColor == "rgb(0, 128, 0)") directions[2] = 1
-    }
-    if (buttonLeftCheck) {
-        let buttonLeftCheck = getComputedStyle(reloadingCell?.getElementsByClassName("button left")[0]) ?? null;
-        let buttonLeftCheckColor = buttonLeftCheck['background-color']
-        if(buttonLeftCheckColor == "rgb(0, 128, 0)") directions[3] = 1
-    }
-
-    //Specify possible room layouts depending on the door locations
-    let none = [null, null, null, null]
-    let deadEnd = [[1, null, null, null],[null, 1, null, null],[null, null, 1, null],[null, null, null, 1]]
-    let imageStraight = [[1, null, 1, null],[null, 1, null, 1]]
-    let imageTurn = [[1, 1, null, null],[null, 1, 1, null],[null, null, 1, 1],[1, null, null, 1]]
-    let TTurn = [[1, 1, 1, null],[null, 1, 1, 1],[1, null, 1, 1],[1, 1, null, 1]]
-    let XTurn = [1, 1, 1, 1]
 
     //create the image to be placed in the cell as background
     const img = document.createElement('img');
     //specify the cell to place the image into
-    const cell = grid[row][col];
-    let currentImg = null
+    const cell = document.getElementsByClassName("imageContainer " + "R" + row + "C" + col)[0]
+    //reset the rotation before transforming again
+    cell.style.transform = 'rotate(0deg)';
     //Specify the image location
     const baseImageLoc = gameDataFolder + 'baseImages/'
 
     //Spawn room always gets this image
     if(row == spawnRoomRow && col == spawnRoomCol){
-        img.src = baseImageLoc + "deadEnd1" + '.png';
+        img.src = baseImageLoc + "deadEnd" + '.png';
         cell.style.backgroundImage = 'url(' + img.src + ')';
         return
     }
@@ -910,79 +895,67 @@ function reloadCell(row, col){
         cell.style.backgroundImage = 'url(' + img.src + ')';
         return
     }
+    
+    let setImage;
+    let rotation;
 
-    //This switch checks every possible layout set above
-    switch(directions.toString()){
-        //Turn Cases (4)
-        case deadEnd[0].toString():
-            img.src = baseImageLoc + "deadEnd1" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
+    //get the room data
+    let entranceData = checkEntrance(row, col)
+
+    switch (entranceData[1]) {
+        case 1:
+            rotation = 0
         break;
-        case deadEnd[1].toString():
-            img.src = baseImageLoc + "deadEnd2" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
+        case 2:
+            rotation = 90
         break;
-        case deadEnd[2].toString():
-            img.src = baseImageLoc + "deadEnd3" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
+        case 3:
+            rotation = 180
         break;
-        case deadEnd[3].toString():
-            img.src = baseImageLoc + "deadEnd4" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        //Straight Cases (2)
-        case imageStraight[0].toString():
-            img.src = baseImageLoc + "straight1" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case imageStraight[1].toString():
-            img.src = baseImageLoc + "straight2" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';      
-        break;
-        //Turn Cases (4)
-        case imageTurn[0].toString():
-            img.src = baseImageLoc + "turn1" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case imageTurn[1].toString():
-            img.src = baseImageLoc + "turn2" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case imageTurn[2].toString():
-            img.src = baseImageLoc + "turn3" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case imageTurn[3].toString():
-            img.src = baseImageLoc + "turn4" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        //T Turn Cases (4)
-            case TTurn[0].toString():
-            img.src = baseImageLoc + "Tturn1" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case TTurn[1].toString():
-            img.src = baseImageLoc + "Tturn2" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case TTurn[2].toString():
-            img.src = baseImageLoc + "Tturn3" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case TTurn[3].toString():
-            img.src = baseImageLoc + "Tturn4" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        //X Turn Cases (4)
-        case XTurn.toString():
-            img.src = baseImageLoc + "Xturn" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';
-        break;
-        case none.toString():
-            img.src = baseImageLoc + "none" + '.png';
-            cell.style.backgroundImage = 'url(' + img.src + ')';   
+        case 4:
+            rotation = 270
         break;
     }
+    let foundData = cell.className.split("data")[1]
+
+    if(foundData !== entranceData[0]){
+        //This switch checks every possible layout set above
+        switch(entranceData[0]){
+            //Turn Cases (4)
+            case "deadEnd":
+                setImage = baseImageLoc + "deadEnd" + '.png';
+            break;
+            //Straight Cases (2)
+            case "straight":
+                setImage = baseImageLoc + "straight" + '.png';
+            break;
+            //Turn Cases (4)
+            case "turn":
+                setImage = baseImageLoc + "turn" + '.png';
+            break;
+            //T Turn Cases (4)
+                case "TTurn":
+                setImage = baseImageLoc + "Tturn" + '.png';
+            break;
+            //X Turn Cases (4)
+            case "XTurn":
+                setImage = baseImageLoc + "Xturn" + '.png';
+            break;
+            case "none":
+                setImage = baseImageLoc + "none" + '.png';
+            break;
+        }
+
+        img.src = setImage
+        cell.style.backgroundImage = 'url(' + img.src + ')'; 
+    }
+
+    //always rotate back
+    cell.style.transform = "rotate(" + rotation + "deg)";
+
+
+
+
 }
 
 //gives back the room type (deadEnd, Straight, Turn, TTurn, XTurn) as well as the orientation of the room type (1 = top, 2 = right, 3 = bottom, 4 = left)
@@ -1022,6 +995,7 @@ let directions = [null, null, null, null]
     }
 
     //Specify possible room layouts depending on the door locations
+    let none = [null, null, null, null]
     const deadEnd = [[1, null, null, null],[null, 1, null, null],[null, null, 1, null],[null, null, null, 1]]
     const imageStraight = [[1, null, 1, null],[null, 1, null, 1]]
     const imageTurn = [[1, 1, null, null],[null, 1, 1, null],[null, null, 1, 1],[1, null, null, 1]]
@@ -1030,6 +1004,8 @@ let directions = [null, null, null, null]
 
     //This switch checks every possible layout set above
     switch(directions.toString()){
+        case none.toString():
+            return ["none", 1]
         //Turn Cases (4)
         case deadEnd[0].toString():
             return ["deadEnd", 1]
@@ -1369,7 +1345,7 @@ async function editMovedHighlight(newRow, newCol, row, col, newButtonArray, butt
                 addCell(newRow, newCol)
                 recolorButtons(row, col, buttonArray, "green")
                 recolorButtons(newRow, newCol, newButtonArray, "green")
-                removeImageInCell(row, col)
+                removeIconInCell(row, col)
 
                 //the new cell does not get focused if control is held down
                 if(controlDown !== 1){
