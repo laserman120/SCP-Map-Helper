@@ -67,6 +67,8 @@ function setup(){
     document.addEventListener("keyup", function(event) {
         if (event.code === 'Enter') {
             selectFirstImage()
+            let inputField = document.getElementById("inputField")
+            inputField.value = ""
         }
     });
     
@@ -273,7 +275,7 @@ function setup(){
         const cellRC = getHighlightedCell()
         if(!cellRC) return;
         deleteCell(grid, cellRC[0], cellRC[1])
-        removeImagesFromCard
+        removeImagesFromCard()
     });
     
     //remove image button
@@ -419,7 +421,10 @@ async function refreshImages(){
             newImg.classList.add('icon');
             cell.appendChild(newImg);
             addImageHover(newImg)
-
+            //clear input
+            let inputField = document.getElementById("inputField")
+            inputField.value = ""
+            //place image into cell container
             placeImageIntoCellContainer(row, col, roomImage)
         });
 
@@ -539,6 +544,8 @@ async function selectFirstImage(){
     let cellRC = getHighlightedCell()
     let cell = getCell(cellRC[0], cellRC[1])
     let imageNames = await fetchImageNames()
+    let row = cellRC[0]
+    let col = cellRC[1]
 
     // Remove existing image if present
     if (cell.querySelector('img')) {
@@ -547,7 +554,7 @@ async function selectFirstImage(){
 
     let orientationCheck = imageNames[0]?.orientation
     //if there is a forced layout present, generate or remove rooms adjacent
-    if(orientationCheck) generateCellsFromOrientationArray(row, col, imageNames[i].orientation);
+    if(orientationCheck) generateCellsFromOrientationArray(row, col, imageNames[0].orientation);
     
 
     // Create new image and add to cell
@@ -557,6 +564,11 @@ async function selectFirstImage(){
     newImg.classList.add('icon');
     cell.appendChild(newImg);
     addImageHover(newImg)
+
+
+    //place image into container
+    let roomImage = gameDataFolder + 'roomImages/' + img.alt.split(",")[0] + '.png';
+    placeImageIntoCellContainer(row, col, roomImage)
 }
 
 async function placeImageIntoCellContainer(row, col, roomImage){
@@ -568,7 +580,6 @@ async function placeImageIntoCellContainer(row, col, roomImage){
     img.src = roomImage;
     cell.style.backgroundImage = 'url(' + img.src + ')';   
 }
-
 
 //add a cell
 function addCell(row, col) {
