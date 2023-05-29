@@ -1,6 +1,9 @@
 # SCP-Map-Helper
 A simple website, allowing users to quickly draw out a map of SCP Containment Breach as well as mods of SCP:CB
 
+This project is still unfinished.
+Once completed it will be available to use one a website.
+
 Features: 
 
 - Draw the map using the buttons on each room to create adjacent rooms.
