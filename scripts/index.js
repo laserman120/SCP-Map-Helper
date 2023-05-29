@@ -283,11 +283,7 @@ function setup(){
     removeImageButton.addEventListener('click', function () {
         const cellRC = getHighlightedCell()
         if(!cellRC) return;
-        const cell = getCell(cellRC[0], cellRC[1])
-        // Remove existing image if present
-        if (cell.querySelector('img')) {
-            cell.querySelector('img').remove();
-        }
+        removeIconInCell(cellRC[0], cellRC[1])
     });
     
     // Create container for delete buttons and append them to it
@@ -439,6 +435,12 @@ function removeIconInCell(row, col){
 
     if (cell.querySelector('img')) {
         cell.querySelector('img').remove();
+
+        const imageContainer = document.getElementsByClassName("imageContainer " + "R" + row + "C" + col)[0]
+        let foundData = imageContainer.className.split("data")[1]
+        console.log(foundData)
+        imageContainer.classList.remove("data" + foundData);
+        reloadCell(row, col)
     }
 }
 
@@ -562,7 +564,6 @@ async function placeImageIntoCellContainer(row, col, roomImage){
     const cell = document.getElementsByClassName("imageContainer " + "R" + row + "C" + col)[0]
     const img = document.createElement('img');
     let cellData = checkEntrance(row, col)
-    console.log(cellData[0])
     cell.classList.add("data" + cellData[0]);
     img.src = roomImage;
     cell.style.backgroundImage = 'url(' + img.src + ')';   
@@ -919,6 +920,8 @@ function reloadCell(row, col){
     let foundData = cell.className.split("data")[1]
 
     if(foundData !== entranceData[0]){
+
+        cell.classList.remove("data" + foundData);
         //This switch checks every possible layout set above
         switch(entranceData[0]){
             //Turn Cases (4)

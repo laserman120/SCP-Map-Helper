@@ -32,3 +32,8 @@ Added enter to set the first image in the list, which is currently shown.
 
 Maybe change the current approach? Replace the background image to set down a rough representation of the current room and add a logo for identification on top,
  this would make the layout of certain rooms clearer while keeping it easy to spot
+
+29.05.23
+Reworked how images are placed.
+It now creates a div inside the cell as the image container, this will adjust automatically as before to the type of room, but also allows for rotation so there are no longer 4 images necessary for each rotation.
+Also added the code to place custom images into the rooms, these will only update once another entrance has been made, or one has been deleted
